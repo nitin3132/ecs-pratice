@@ -7,7 +7,7 @@ on:
       - 'Practice/ecs-pratice/**'
       - '.github/workflows/test-practice.yml'
   pull_request:
-    branches: [ main, develop, feature/* ]
+    branches: [ main, develop ]
     paths:
       - 'Practice/ecs-pratice/**'
 
@@ -27,6 +27,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        ls -la Practice/ecs-pratice/
         pip install -r Practice/ecs-pratice/requirements.txt
         pip install pytest pytest-cov
     
@@ -61,8 +62,8 @@ jobs:
     - name: Build Docker image
       uses: docker/build-push-action@v4
       with:
-        context: .
-        file: ./Dockerfile
+        context: Practice/ecs-pratice
+        file: Practice/ecs-pratice/Dockerfile
         push: false
         tags: ecs-practice:latest
         load: true
