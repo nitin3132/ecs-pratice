@@ -3,13 +3,8 @@ name: Test Practice ECS Application
 on:
   push:
     branches: [ main, develop, feature/* ]
-    paths:
-      - 'Practice/ecs-pratice/**'
-      - '.github/workflows/test-practice.yml'
   pull_request:
     branches: [ main, develop ]
-    paths:
-      - 'Practice/ecs-pratice/**'
 
 jobs:
   test:
@@ -27,20 +22,18 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        ls -la Practice/ecs-pratice/
-        pip install -r Practice/ecs-pratice/requirements.txt
+        pip install -r requirements.txt
         pip install pytest pytest-cov
     
     - name: Lint with flake8
       run: |
         pip install flake8
         flake8 Practice/ecs-pratice/app.py --count --select=E9,F63,F7,F82 --show-source --statistics
-        flake8 Practice/ecs-pratice/app.py --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-      continue-on-error: true
+        flake8 app.py --count --select=E9,F63,F7,F82 --show-source --statistics
+        flake8 
     
     - name: Test Flask app
       run: |
-        cd Practice/ecs-pratice
         python -m pytest test_app.py -v --cov=. --cov-report=xml
       continue-on-error: true
     
@@ -63,7 +56,7 @@ jobs:
       uses: docker/build-push-action@v4
       with:
         context: Practice/ecs-pratice
-        file: Practice/ecs-pratice/Dockerfile
-        push: false
+        file: Pra.
+        file: .
         tags: ecs-practice:latest
         load: true
